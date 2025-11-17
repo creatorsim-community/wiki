@@ -1,14 +1,16 @@
-# CREATOR Documentation
+# CREATOR documentation
 This repository contains documentation for the [CREATOR project](https://creatorsim.github.io).
 
-The documentation is generated using [Honkit](https://honkit.netlify.app/).
+The webpage is generated using [Honkit](https://honkit.netlify.app/).
 
-To build the webpage, using [Bun](https://bun.sh/), use:
+To build the webpage, with [Bun](https://bun.sh/)[^1], run:
 ```
-bun run build
+bunx build
 ```
 
-To deploy it, using [Bun](https://bun.sh/), use:
+To deploy it, with [Bun](https://bun.sh/)[^1], run:
 ```
-bun run serve
+bunx serve
 ```
+
+[^1]: Other Node package managers such as [NPM](https://www.npmjs.com/), [yarn](https://yarnpkg.com/), etc. _should_ work as well.
