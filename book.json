@@ -1,4 +1,4 @@
 {
   "root": "./book",
-  "plugins": ["flexible-alerts"]
+  "plugins": ["flexible-alerts", "mermaid-md-adoc"]
 }
