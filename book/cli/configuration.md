@@ -15,8 +15,6 @@ If the configuration file doesn't exist, CREATOR creates it with default setting
 
 ## Configuration Structure
 
-Source: `src/cli/creator6.mts` - `ConfigType` interface and `DEFAULT_CONFIG`
-
 The configuration file has three main sections:
 
 ```yaml
@@ -259,44 +257,3 @@ CREATOR loads configuration in this order:
 2. **User config**: `~/.config/creator/config.yml` (if exists)
 3. **Custom config**: `--config` option (if specified)
 4. **Command-line options**: Override config file settings
-
-### Precedence Example
-
-```yaml
-# config.yml
-settings:
-  accessible: false
-  max_states: 50
-```
-
-```bash
-# Command line overrides accessible setting
-creator6 --accessible program.s
-# Result: accessible=true, max_states=50
-```
-
-## Validation and Errors
-
-CREATOR validates configuration on load:
-
-### Invalid YAML Syntax
-
-```
-Error loading configuration: bad indentation of a mapping entry
-```
-Fix YAML formatting (use 2-space indentation).
-
-### Unknown Settings
-
-Unknown settings are ignored with a warning:
-
-```
-Warning: Unknown setting 'unknow_option' ignored
-```
-
-### Invalid Values
-
-```
-Error: max_states must be a number
-```
-Check value types match expected format.

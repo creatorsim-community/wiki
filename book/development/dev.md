@@ -1,6 +1,5 @@
 # Developing CREATOR
 
-> [!WARNING]
 > Make sure to initialize the [git submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules).
 > 
 > You can either add the `--recurse-submodules` flag when doing `git clone` or
@@ -12,7 +11,6 @@
 This project uses [Bun](https://bun.sh) (for Web) and
 [Deno](https://deno.com/) (for CLI).
 
-> [!IMPORTANT]
 > Building the assembler dependency requires installing
 > [rustup](https://rustup.rs/), [Deno](https://deno.com/), and
 > [wasm-pack](https://drager.github.io/wasm-pack/).
@@ -33,7 +31,6 @@ bun dev:web
 bun dev:cli
 ```
 
-> [!NOTE]
 > Remember to pass the extra arguments, e.g:
 > ```sh
 > bun dev:cli -a ./architecture/RISCV/RV32IMFD.yml -I -c creatorconfig.yml
@@ -156,7 +153,7 @@ We'll need to [launch the application in DEV mode](#compile-and-hot-reload-for-d
 - [Vue.js docs](https://vuejs.org/guide/)
 - [BoostrapVueNext Docs](https://bootstrap-vue-next.github.io/bootstrap-vue-next/) & [Bootstrap Docs](https://getbootstrap.com/docs/)
 - [Font Awesome Icons](https://fontawesome.com/search?ic=free) & [Font Awesome Docs](https://docs.fontawesome.com/)
-- [vue-codemirror6](https://github.com/logue/vue-codemirror6) & [Codemirror Docs](https://codemirror.net/docs/)
+- [Monaco Docs](https://microsoft.github.io/monaco-editor/docs.html), [monaco-vim](https://github.com/brijeshb42/monaco-vim) & [monaco-yaml](https://github.com/remcohaszing/monaco-yaml)
 - [vue3-apexcharts](https://github.com/apexcharts/vue3-apexcharts) & [ApexCharts Docs](https://apexcharts.com/docs)
 - [CSS Tricks](https://css-tricks.com/)
 - [`vue-tricks.md`](docs/vue-tricks.md)

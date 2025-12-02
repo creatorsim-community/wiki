@@ -4,19 +4,18 @@ Welcome to the CREATOR documentation! CREATOR is a comprehensive, open-source as
 
 ### 👨‍🎓 **Students, Start Here!**
 New to CREATOR? Get up and running quickly:
-1. **[Try it now in your browser](https://creatorsim.github.io/creator/)** - No installation needed!
-2. Follow the **[Quick Start Guide](getting-started/quick-start.md)** to write your first program
-3. Learn about the **[Web Interface](web/user-interface.md)** to navigate the simulator
-4. Try the **[Interactive Tutorial Mode](cli/tutorial.md)** for step-by-step learning
+1. **[Try it now in your browser](https://rajayonin.github.io/creatorV/)** - No installation needed!
+2. Learn about the **[Web Interface](web/user-interface.md)** to navigate the simulator
 
 ### 👨‍🏫 **Teachers, Start Here!**
 Setting up CREATOR for your course:
-1. **[Installation Guide](getting-started/installation.md)** - Deploy for your classroom
-2. **[CLI User Guide](cli/README.md)** - Command-line tools for assignments and grading
-3. **[Architecture Guide](architecture/overview.md)** - Understand supported architectures (RISC-V, MIPS, Z80)
-4. **[Custom Architectures](development/custom-architectures.md)** - Create your own instruction sets
-5. **[Examples](cli/examples.md)** - Sample programs for teaching
+1. **[Installation Guide](cli/installation.md)** - Get the CLI version up and running
+2. **[Teaching Resources](teaching-resources/teaching-resources.md)** - Useful materials for educators
+3. **[Custom Architectures](development/custom-architectures.md)** - Create your own instruction sets
 
+### Developers, Start Here!
+Interested in contributing or extending CREATOR?
+1. **[Development Guide](development/dev.md)** - Learn how to set up the development
 
 ---
 

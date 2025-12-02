@@ -85,7 +85,7 @@ CREATOR> run 1000000   # Run 1 million instructions
 - Program completes (execution_index = -2)
 - Breakpoint is hit
 - Error occurs
-- User interrupts (Ctrl+C or `pause` command)
+- Pause shortcut issued
 
 **Output**:
 - Each instruction displayed as it executes
@@ -142,23 +142,6 @@ Execution paused.
 CREATOR> continue
 # Resumes execution
 ```
-
----
-
-### `pause`
-
-Toggle pause state during execution.
-
-**Syntax**: `pause`
-
-**Behavior**:
-- If running: Pauses execution at next instruction
-- If paused: Resumes execution
-
-**Use Cases**:
-- Stop runaway execution
-- Examine state mid-run
-- Interactive control during long runs
 
 ---
 
@@ -299,7 +282,7 @@ Display loaded instructions with addresses, labels, and code.
 - `list <n>` - Show first N instructions
 - `list --limit <n>` - Show first N instructions (explicit)
 
-**Output Format (Assembly Mode)**:
+**Output Format (When loading an Assembly Source)**:
 ```
     B | Address | Label      | Loaded Instruction      | User Instruction
    ---|---------|------------|-------------------------|------------------------
@@ -307,7 +290,7 @@ Display loaded instructions with addresses, labels, and code.
       | 0x400004|            | lui a0,0x10000          | la a0, myword
 ```
 
-**Output Format (Binary Mode)**:
+**Output Format (When loading a Binary File)**:
 ```
     B | Address | Label      | Decoded Instruction     | Machine Code (hex)
    ---|---------|------------|-------------------------|------------------------
@@ -344,22 +327,16 @@ Shows the instruction about to be executed.
 
 ---
 
-### `reg <type|name> [format]`
+### `reg <registerBank|name> [format]`
 
 Display register values.
 
 **Syntax**:
-- `reg list` - List available register types
-- `reg <type>` - Show all registers of type
-- `reg <type> <format>` - Show registers in specific format
+- `reg list` - List available register banks
+- `reg <registerBank>` - Show all registers of register bank
+- `reg <registerBank> <format>` - Show registers in specific format
 - `reg <name>` - Show specific register
 - `reg <name> <format>` - Show specific register in format
-
-**Register Types** (architecture-dependent):
-- `int_registers` - Integer/general-purpose registers
-- `fp_registers` - Floating-point registers
-- `csr_registers` - Control and Status Registers (RISC-V)
-- Other architecture-specific types
 
 **Formats**:
 - `raw` - Hexadecimal (default)
@@ -391,10 +368,6 @@ t0: 0x00000123 | 291
 CREATOR> reg pc
 PC: 0x00400000 | 4194304
 ```
-
-**Register Aliases**:
-- RISC-V: `x0`/`zero`, `x1`/`ra`, `x5`/`t0`, `x10`/`a0`, etc.
-- Shows all aliases in parentheses
 
 ---
 
@@ -637,8 +610,6 @@ Display all available commands with brief descriptions.
 - Keyboard shortcuts (if enabled)
 - Aliases (from configuration)
 
-See the actual output in [utils.mts](../../src/cli/utils.mts).
-
 ---
 
 ### `about`
@@ -653,40 +624,6 @@ Display information about CREATOR.
 - Runtime version (Deno/Node)
 - Platform information
 - Copyright and credits
-- ASCII art logo (unless in accessible mode)
-
-**Example Output** (normal mode):
-```
-
- ██████╗██████╗ ███████╗ █████╗ ████████╗ ██████╗ ██████╗ 
-██╔════╝██╔══██╗██╔════╝██╔══██╗╚══██╔══╝██╔═══██╗██╔══██╗
-██║     ██████╔╝█████╗  ███████║   ██║   ██║   ██║██████╔╝
-██║     ██╔══██╗██╔══╝  ██╔══██║   ██║   ██║   ██║██╔══██╗
-╚██████╗██║  ██║███████╗██║  ██║   ██║   ╚██████╔╝██║  ██║
- ╚═════╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝
-    didaCtic and geneRic assEmbly progrAmming simulaTOR
-
-
-╔════════════════════════════════════════════════════════════╗
-║ CREATOR Information                                        ║
-╠════════════════════════════════════════════════════════════╣
-║ ⚙️  CREATOR CLI Version: 0.1.0                             ║
-║ 🚀 CREATOR Core Version: 6.0.0                             ║
-║ 🔧 Deno Version: 2.5.2                                     ║
-╠════════════════════════════════════════════════════════════╣
-║ System Information                                         ║
-╠════════════════════════════════════════════════════════════╣
-║ 💻 Platform: darwin                                        ║
-║ 🧠 Architecture: arm64                                     ║
-╠════════════════════════════════════════════════════════════╣
-║ About                                                      ║
-╠════════════════════════════════════════════════════════════╣
-║ CREATOR is a didactic and generic assembly                 ║
-║ simulator built by the ARCOS group at the                  ║
-║ Carlos III de Madrid University (UC3M)                     ║
-║ © Copyright (C) 2025 CREATOR Team                          ║
-╚════════════════════════════════════════════════════════════╝
-```
 
 ---
 
@@ -717,7 +654,7 @@ Aliases can be defined in your config file at:
 
 Exit the simulator.
 
-**Syntax**: `quit` or `exit` or `q`
+**Syntax**: `quit`
 
 **Behavior**:
 - Exits interactive mode
@@ -751,65 +688,3 @@ When `keyboard_shortcuts` is enabled in config, single keypresses can execute co
 - `Ctrl+L` → `clear` (example)
 
 See [Configuration](configuration.md) for setting up shortcuts.
-
----
-
-## Command-Line Editing
-
-The interactive mode supports standard line editing:
-- **Arrow Keys**: Navigate command history and cursor
-- **Ctrl+C**: Cancel current input
-- **Ctrl+D**: Exit simulator
-- **Ctrl+L**: Clear screen (if not bound to command)
-- **Tab**: Auto-completion (future feature)
-
----
-
-## Tips and Tricks
-
-### Efficient Debugging
-```
-# Quick breakpoint workflow
-CREATOR> b main       # Set breakpoint
-CREATOR> r            # Run to breakpoint
-CREATOR> s            # Step a few times
-CREATOR> reg t0       # Check specific register
-CREATOR> mem 0x10000000  # Check memory
-```
-
-### Reverse Debugging Workflow
-```
-# Set max_states in config first
-CREATOR> r 1000       # Run 1000 instructions
-CREATOR> unstep       # Oops, went too far
-CREATOR> unstep       # Back one more
-CREATOR> s            # Re-execute carefully
-```
-
-### State Comparison
-```
-CREATOR> snapshot before.json
-CREATOR> r 100
-CREATOR> snapshot after.json
-# Compare files externally or restore before.json to retry
-```
-
-### Finding Bugs
-```
-CREATOR> until suspect_function
-CREATOR> list
-CREATOR> break suspicious_line
-CREATOR> r
-CREATOR> reg int_registers
-CREATOR> mem <address_from_register>
-CREATOR> stack
-```
-
----
-
-## Next Steps
-
-- Understand [Interactive Mode](interactive-mode.md) workflow
-- Customize with [Configuration](configuration.md)
-- Try [Tutorial Mode](tutorial.md) for guided practice
-- See [Examples](examples.md) for real usage patterns

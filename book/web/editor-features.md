@@ -56,8 +56,8 @@ Hover over the squiggly lines to see detailed error messages.
 ![Editor Error Indicators](img/editor_hovererror.png)
 *Figure: Error and warning indicators in the editor.*
 
-## VIM Mode
-Advanced users can enable VIM keybindings by clicking the "VIM" button in the editor toolbar. This activates VIM mode, allowing users to navigate and edit code using VIM commands. Custom keybinding can also be configured in the settings.
+## Vim Mode
+Advanced users can enable Vim keybindings by clicking the "Vim" button in the editor toolbar. This activates Vim mode, allowing users to navigate and edit code using Vim commands. Custom keybinding can also be configured in the settings.
 
-![Editor VIM Mode](img/editor_vim.png)
-*Figure: VIM mode enabled in the editor.*
+![Editor Vim Mode](img/editor_VIM.png)
+*Figure: Vim mode enabled in the editor.*

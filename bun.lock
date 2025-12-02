@@ -3,7 +3,7 @@
   "workspaces": {
     "": {
       "dependencies": {
-        "gitbook-plugin-flexible-alerts": "^1.0.4",
+        "gitbook-plugin-alerts": "file:./plugins/gitbook-plugin-alerts",
         "honkit": "^6.1.4",
         "honkit-plugin-mermaid-md-adoc": "^0.0.8",
       },
@@ -172,7 +172,7 @@
 
     "get-proto": ["get-proto@1.0.1", "", { "dependencies": { "dunder-proto": "^1.0.1", "es-object-atoms": "^1.0.0" } }, "sha512-sTSfBjoXBp89JvIKIefqw7U2CCebsc74kiY6awiGogKtoSGbgjYE/G/+l9sF3MWFPNc9IcoOC4ODfKHfxFmp0g=="],
 
-    "gitbook-plugin-flexible-alerts": ["gitbook-plugin-flexible-alerts@1.0.4", "", {}, "sha512-1Cm2nVwSMjSHln/880w0m6jN2BTQCrlHIyWaJih+iVGRlqqUNuTqLRksmyDOtJhFoV7+6ja2NVj0JYV39q/aWQ=="],
+    "gitbook-plugin-alerts": ["gitbook-plugin-alerts@file:plugins/gitbook-plugin-alerts", {}],
 
     "gitbook-plugin-livereload": ["gitbook-plugin-livereload@0.0.1", "", {}, "sha512-+5xinicId2ZcbP6jBTFfQBnjz8nhoBgcOuQfKTEM6Yg9fBsmo2mxY6ubrx1b5ozuIMyfDLkSihx97A7+X+EtQQ=="],
 

@@ -5,12 +5,12 @@
 
 ## Web User Guide
 * [Overview](web/overview.md)
-* [User Interface](web/user-interface.md#user-interface)
+* [User Interface](web/user-interface.md)
     * [Architecture Select View](web/user-interface.md#architecture-select-view)
     * [Editor View](web/user-interface.md#editor-view)
     * [Simulator View](web/user-interface.md#simulator-view)
     * [Architecture View](web/user-interface.md#architecture-view)
-* [Editor Features](web/editor-features.md#editor-features)
+* [Editor Features](web/editor-features.md)
     * [Syntax Highlighting](web/editor-features.md#syntax-highlighting)
     * [Auto-Completion (IntelliSense)](web/editor-features.md#auto-completion-intellisense)
     * [Help Tooltips](web/editor-features.md#help-tooltips)
@@ -18,8 +18,8 @@
     * [Code Comments](web/editor-features.md#code-comments)
     * [Minimap](web/editor-features.md#minimap)
     * [Error and Warning Indicators](web/editor-features.md#error-and-warning-indicators)
-    * [VIM Mode](web/editor-features.md#vim-mode)
-* [Assemblers](web/assemblers.md#assemblers)
+    * [Vim Mode](web/editor-features.md#vim-mode)
+* [Assemblers](web/assemblers.md)
     * [CREATOR Assembler](web/assemblers.md#creator-assembler)
     * [RASM](web/assemblers.md#rasm)
 * [Execution Control](web/execution.md)
@@ -27,11 +27,25 @@
 ## CLI User Guide
 * [Overview](cli/README.md)
 * [Installation](cli/installation.md)
-* [Command-Line Options](cli/command-line-options.md)
-* [Interactive Mode](cli/interactive-mode.md)
-* [Commands Reference](cli/commands-reference.md)
+* [Command-Line Options](cli/command-line-options.md#command-line-options)
+    * [Required Options](cli/command-line-options.md#required-options)
+    * [Input Options](cli/command-line-options.md#input-options)
+    * [Assembler Options](cli/command-line-options.md#assembler-options)
+    * [Other Options](cli/command-line-options.md#other-options)
+* [Commands Reference](cli/commands-reference.md#commands-reference)
+    * [Execution Controls](cli/commands-reference.md#execution-control)
+    * [Breakpoints](cli/commands-reference.md#breakpoint-management)
+    * [Inspection](cli/commands-reference.md#inspection-commands)
+    * [State Management](cli/commands-reference.md#state-management)
+    * [Utilities](cli/commands-reference.md#utility-commands)
 * [Configuration](cli/configuration.md)
 
+## Teaching Resources
+* [Teaching Resources](teaching-resources/teaching-resources.md)
+
 ## Development Guide
+* [Overview](development/dev.md)
+
+
 
 
