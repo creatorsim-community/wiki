@@ -8,7 +8,7 @@ CREATOR supports extensive configuration through YAML files, allowing you to cus
 
 **Custom location**: Use `--config` option:
 ```bash
-creator6 --config ~/my-creator-config.yml program.s
+creator-cli --config ~/my-creator-config.yml program.s
 ```
 
 If the configuration file doesn't exist, CREATOR creates it with default settings automatically.

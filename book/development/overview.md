@@ -1,5 +1,6 @@
-# Development Guide Overview
+# Architecture Overview
 
+<!--
 This guide covers extending and developing CREATOR, including architecture, core internals, and customization.
 
 ## Target Audience
@@ -308,3 +309,4 @@ memory.getHint(address)
 - Learn [Interrupts](interrupts.md) for interrupt handling
 - Explore [Assembler Integration](assemblers.md) for compilation
 - Design [Custom Architectures](custom-architectures.md)
+-->

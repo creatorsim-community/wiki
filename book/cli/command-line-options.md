@@ -5,7 +5,7 @@ The CREATOR CLI accepts various command-line options to configure architecture, 
 ## Basic Usage
 
 ```bash
-creator [options]
+creator-cli [options]
 ```
 
 ## Required Options
@@ -21,13 +21,13 @@ Specifies which processor architecture to simulate.
 **Examples**:
 ```bash
 # RISC-V architecture
-creator --architecture architecture/riscv32.yml --assembly program.s
+creator-cli --architecture architecture/riscv32.yml --assembly program.s
 
 # MIPS architecture
-creator -a architecture/mips32.yml -s program.s
+creator-cli -a architecture/mips32.yml -s program.s
 
 # Z80 architecture
-creator -a architecture/z80.yml -s program.s
+creator-cli -a architecture/z80.yml -s program.s
 ```
 
 ## Input Options
@@ -41,7 +41,7 @@ Assembles the specified file and loads it into memory.
 
 **Example**:
 ```bash
-creator -a riscv32.yml --assembly hello.s
+creator-cli -a riscv32.yml --assembly hello.s
 ```
 
 ### `--bin`, `-b`
@@ -53,7 +53,7 @@ Loads a pre-assembled binary file without compilation.
 
 **Example**:
 ```bash
-creator -a riscv32.yml --bin program.bin
+creator-cli -a riscv32.yml --bin program.bin
 ```
 
 **Note**: Binary and assembly options are mutually exclusive. If both are provided, binary takes precedence.
@@ -67,12 +67,12 @@ Loads a library of pre-assembled code that your program can reference. This is o
 
 **Example**:
 ```bash
-creator -a riscv32.yml -l stdlib.yml -s program.s
+creator-cli -a riscv32.yml -l stdlib.yml -s program.s
 ```
 
 ## Assembler Options
 
-### `--compiler`, `-C`
+### `--assembler`, `-C`
 
 **Type**: String  
 **Default**: `default`  
@@ -88,13 +88,13 @@ Selects which assembler to use for compilation.
 **Examples**:
 ```bash
 # Use default CREATOR assembler
-creator -a riscv32.yml -s program.s
+creator-cli -a riscv32.yml -s program.s
 
 # Use sjasmplus for Z80
-creator -a z80.yml -s program.s --compiler sjasmplus
+creator-cli -a z80.yml -s program.s --assembler sjasmplus
 
 # Use rasm for Z80
-creator -a z80.yml -s program.s -C rasm
+creator-cli -a z80.yml -s program.s -C rasm
 ```
 
 ### `--isa`, `-i`
@@ -108,13 +108,13 @@ In supportted architectures, specifies which ISA extensions to enable. If unspec
 **Examples**:
 ```bash
 # RISC-V with M extension (multiply/divide)
-creator -a riscv32.yml --isa M -s program.s
+creator-cli -a riscv32.yml --isa M -s program.s
 
 # RISC-V with multiple extensions
-creator -a riscv32.yml --isa M F D -s program.s
+creator-cli -a riscv32.yml --isa M F D -s program.s
 
 # RISC-V base only (no extensions)
-creator -a riscv32.yml -s program.s
+creator-cli -a riscv32.yml -s program.s
 ```
 
 ## Other Options
@@ -129,7 +129,7 @@ Disables colors, ASCII art, and fancy formatting for compatibility with screen r
 
 **Example**:
 ```bash
-creator --accessible -a riscv32.yml -s program.s
+creator-cli --accessible -a riscv32.yml -s program.s
 ```
 
 **Changes in Accessible Mode**:
@@ -151,7 +151,7 @@ Specifies a custom configuration file instead of the default location.
 
 **Example**:
 ```bash
-creator -a riscv32.yml -s program.s --config custom-config.yml
+creator-cli -a riscv32.yml -s program.s --config custom-config.yml
 ```
 
 See [Configuration](configuration.md) for config file format.
@@ -166,7 +166,7 @@ Saves the current simulator state to the specified file.
 
 **Example**:
 ```bash
-creator -a riscv32.yml -s program.s --state mystate.json
+creator-cli -a riscv32.yml -s program.s --state mystate.json
 ```
 
 **Note**: Use `restore` command in interactive mode to load saved states.
@@ -179,11 +179,28 @@ creator -a riscv32.yml -s program.s --state mystate.json
 
 Used for grading and validation of student exercises. Not typically used by end users. See [Grading Student Exercises](teaching-resources.md#grading-student-exercises) for details.
 
+
+### `--interrupt-handler`
+
+**Possible values**: `"default"`, `"custom"`  
+**Default**: `"default"`  
+**Description**: Interrupt handler to use, either CREATOR's default handler or a custom architecture-defined one
+
+Selects the desired interrupt handler to use: CREATOR's default handler, with support for architecture-defined system calls, or a fully custom architecture-defined one.
+
+**Example**:
+```bash
+creator-cli -a riscv32.yml -s program.s --interrupt-handler custom
+```
+
+See [Interrupt Support](../teaching-resources/custom-architectures.md#interrupt-support) for a guide on how to use these features.
+
+
 ## Getting Help
 
 Show all available options:
 ```bash
-creator --help
+creator-cli --help
 ```
 
 ## Next Steps

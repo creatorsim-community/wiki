@@ -2,6 +2,7 @@
 
 CREATOR supports a comprehensive interrupt system for simulating asynchronous events and exception handling. This includes software interrupts, timer interrupts, external interrupts, and environment calls.
 
+<!--
 ## Interrupt Architecture
 
 ### Overview
@@ -536,3 +537,4 @@ CREATOR> reg mepc
 - Study [Privileged Instructions](privileged.md) for mode switching
 - See [Execution Engine](execution-engine.md) for integration
 - Review [Core Architecture](core-architecture.md) for system overview
+-->

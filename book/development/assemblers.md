@@ -1,5 +1,6 @@
 # Assembler Integration
 
+<!--
 CREATOR supports multiple assemblers through a standardized integration framework. This allows adding new assemblers for different architectures and syntaxes.
 
 ## Integration Overview
@@ -286,3 +287,13 @@ assert(tag_instructions['main'] === 0x00400000);
 - See [Execution Engine](execution-engine.md) for instruction handling
 - Review existing assemblers for examples
 - Read [Creating Custom Architectures](custom-architectures.md) for architecture integration
+-->
+
+
+## Resources
+- [A. Guerrero - Desarrollo de un Compilador Genérico de Lenguaje Ensamblador para el Simulador CREATOR](https://github.com/ALVAROPING1/TFG)
+- [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
+- [Compiler Contribution Docs](https://github.com/ALVAROPING1/CreatorCompiler/blob/master/CONTRIBUTING.md)
+- [Serde (Deserialization Library) Docs](https://docs.rs/serde/)
+- [Chumsky (Parser Library) Docs](https://docs.rs/chumsky)
+- [Ariadne (Error Renderer Library) Docs](https://docs.rs/ariadne)

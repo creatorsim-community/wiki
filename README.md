@@ -14,4 +14,11 @@ To deploy it, with [Bun](https://bun.sh/)[^1], run:
 bun run serve
 ```
 
+
+To generate a PDF file, with [Bun](https://bun.sh/)[^1], run:
+```
+bun pdf
+```
+
+
 [^1]: Other Node package managers such as [NPM](https://www.npmjs.com/), [yarn](https://yarnpkg.com/), etc. _should_ work as well.

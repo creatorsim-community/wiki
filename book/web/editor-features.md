@@ -59,5 +59,5 @@ Hover over the squiggly lines to see detailed error messages.
 ## Vim Mode
 Advanced users can enable Vim keybindings by clicking the "Vim" button in the editor toolbar. This activates Vim mode, allowing users to navigate and edit code using Vim commands. Custom keybinding can also be configured in the settings.
 
-![Editor Vim Mode](img/editor_VIM.png)
+![Editor Vim Mode](img/editor_vim.png)
 *Figure: Vim mode enabled in the editor.*

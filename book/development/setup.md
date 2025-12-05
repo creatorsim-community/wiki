@@ -1,16 +1,14 @@
-# Developing CREATOR
-
-> Make sure to initialize the [git submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules).
+# Project Setup
+> [!WARNING]
+> If you clone the project, Make sure to initialize the [git submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules).
 > 
 > You can either add the `--recurse-submodules` flag when doing `git clone` or
 > do `git submodule update --init --recursive` once it is already cloned.
 
-
-
-## Project Setup
 This project uses [Bun](https://bun.sh) (for Web) and
 [Deno](https://deno.com/) (for CLI).
 
+> [!IMPORTANT]
 > Building the assembler dependency requires installing
 > [rustup](https://rustup.rs/), [Deno](https://deno.com/), and
 > [wasm-pack](https://drager.github.io/wasm-pack/).
@@ -31,6 +29,7 @@ bun dev:web
 bun dev:cli
 ```
 
+> [!NOTE]
 > Remember to pass the extra arguments, e.g:
 > ```sh
 > bun dev:cli -a ./architecture/RISCV/RV32IMFD.yml -I -c creatorconfig.yml
@@ -86,10 +85,12 @@ deno test -A --unstable-node-globals --parallel
 
 
 
+<!--
 ## Backend RPC Server
 This project includes a JSON RPC server that exposes the CREATOR emulator's core functionalities.
 
 For more details, see the [RPC Server README](src/rpc/README.md).
+-->
 
 
 
@@ -101,10 +102,18 @@ The recommended extensions are:
 - [`esbenp.prettier-vscode`](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
 - [`redhat.vscode-yaml`](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml)
 
-#### Debugging
+> [!NOTE]
+> The recommended formatter to use with Vue files is Prettier (`esbenp.prettier-vscode`):
+> ```json
+> "[vue]": {
+>     "editor.defaultFormatter": "esbenp.prettier-vscode"
+> },
+> ```
+
+### Debugging
 We provide some example [launch configurations](https://code.visualstudio.com/docs/debugtest/debugging-configuration#_launch-configurations):
 
-##### Web
+#### Web
 We'll need to [launch the application in DEV mode](#compile-and-hot-reload-for-development), and then attach the VS Code debugger to the Chrome instance.
 ```json
 {
@@ -116,7 +125,7 @@ We'll need to [launch the application in DEV mode](#compile-and-hot-reload-for-d
 }
 ```
 
-##### CLI
+#### CLI
 ```json
 {
     "type": "node",
@@ -141,28 +150,8 @@ We'll need to [launch the application in DEV mode](#compile-and-hot-reload-for-d
 ```
 
 
-## Resources
-
-### General
+## General resources
 - [MDN Web Docs](https://developer.mozilla.org/)
 - [The TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html)
 - [D. Camarmas et al. - CREATOR: Simulador didáctico y genérico para la programación en ensamblador](https://zenodo.org/records/5130302)
 
-
-### Web
-- [Vue.js docs](https://vuejs.org/guide/)
-- [BoostrapVueNext Docs](https://bootstrap-vue-next.github.io/bootstrap-vue-next/) & [Bootstrap Docs](https://getbootstrap.com/docs/)
-- [Font Awesome Icons](https://fontawesome.com/search?ic=free) & [Font Awesome Docs](https://docs.fontawesome.com/)
-- [Monaco Docs](https://microsoft.github.io/monaco-editor/docs.html), [monaco-vim](https://github.com/brijeshb42/monaco-vim) & [monaco-yaml](https://github.com/remcohaszing/monaco-yaml)
-- [vue3-apexcharts](https://github.com/apexcharts/vue3-apexcharts) & [ApexCharts Docs](https://apexcharts.com/docs)
-- [CSS Tricks](https://css-tricks.com/)
-- [`vue-tricks.md`](docs/vue-tricks.md)
-
-
-### Assembler
-- [A. Guerrero - Desarrollo de un Compilador Genérico de Lenguaje Ensamblador para el Simulador CREATOR](https://github.com/ALVAROPING1/TFG)
-- [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
-- [Compiler Contribution Docs](https://github.com/ALVAROPING1/CreatorCompiler/blob/master/CONTRIBUTING.md)
-- [Serde (Deserialization Library) Docs](https://docs.rs/serde/)
-- [Chumsky (Parser Library) Docs](https://docs.rs/chumsky)
-- [Ariadne (Error Renderer Library) Docs](https://docs.rs/ariadne)

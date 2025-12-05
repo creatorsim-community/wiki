@@ -37,7 +37,7 @@ You can always access your parent's component through `this.$parent`, but if you
 
 The alternative is using [events](https://vuejs.org/guide/components/events.html#emitting-and-listening-to-events), by emiting an event on the setter and capturing it on the parent with a [v-model](https://vuejs.org/guide/components/v-model.html#component-v-model).
 
-```vue
+```html
 <!-- Parent.vue -->
 
 <script lang="ts">
@@ -60,7 +60,7 @@ export default defineComponent({
 </template>
 ```
 
-```vue
+```html
 <!-- Child.vue -->
 
 <script lang="ts">
@@ -91,7 +91,7 @@ export default defineComponent({
 ## Sync data between a component and the root component
 This is done similarly to how we [sync between a parent and a child](#sync-data-between-parent-and-child-component), but instead of using events, we access the root component with `this.$root`:
 
-```vue
+```html
 <!-- App.vue -->
 
 <script lang="ts">
@@ -114,7 +114,7 @@ export default defineComponent({
 </template>
 ```
 
-```vue
+```html
 <!-- Child.vue -->
 
 <script lang="ts">
@@ -146,7 +146,7 @@ export default defineComponent({
 To easily navigate the component tree, you can make use of [references](https://vuejs.org/guide/essentials/template-refs.html#template-refs). You can tag a child component with a `ref`, and it will be one of the references (`.$refs`) of the parent.
 
 Let's see a simple example, with a simple `App.vue` root component:
-```vue
+```html
 <script lang="ts">
 //...
 </script>
@@ -176,7 +176,7 @@ There is a tricky case where Vue's reactivity is not so reactive. Imagine you de
 
 To do this, we'll create a dummy variable and a method that will update that variable on the parent component, and pass the variable to each child component we want to refresh through the use of [the key attribute](https://vuejs.org/api/built-in-special-attributes.html#key).
 
-```vue
+```html
 <!-- App.vue -->
 
 <script lang="ts">
@@ -270,7 +270,7 @@ export const coreEvents = mitt()
    ```
 
 **3. Subscribe to events in Vue components**:
-```vue
+```html
 <!-- Component.vue -->
 <script lang="ts">
 import { defineComponent } from "vue"
@@ -336,7 +336,7 @@ export function reset() {
 }
 ```
 
-```vue
+```html
 <!-- Component.vue -->
 <script lang="ts">
 export default defineComponent({

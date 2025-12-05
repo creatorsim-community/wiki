@@ -5,9 +5,10 @@ CREATOR is a browser-based assembly programming environment that requires no ins
 ![Web Interface](./img/simulator_default.png)
 *Figure: CREATOR main interface*
 
-## Access
 
-Visit **[https://creatorsim.github.io/creator/](https://creatorsim.github.io/creator/)** to use CREATOR online.
+## Access
+Visit **{{book.appUrl}}** to use CREATOR online.
+
 
 ## Features
 - **Multi-Architecture Support**: Work with RISC-V, MIPS, Z80, and custom architectures.
@@ -15,6 +16,7 @@ Visit **[https://creatorsim.github.io/creator/](https://creatorsim.github.io/cre
 - **Simulator**: Step through code, set breakpoints, and inspect memory/registers.
 - **Modular Assemblers**: Support for multiple assemblers like CREATOR Assembler and RASM.
 - **User-Friendly Interface**: Intuitive layout with architecture selection, code editor, and simulator panels.
+
 
 ## Next Steps
 - Explore the [User Interface](user-interface.md) to familiarize yourself with the layout and features.
