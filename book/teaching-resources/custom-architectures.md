@@ -229,6 +229,12 @@ directives:
 ```
 
 
+
+## Plugins
+
+<!-- TODO -->
+
+
 ## Interrupt Support
 Now, let's take our architecture and add support for some simple maskable and nonmaskable interrupts.
 

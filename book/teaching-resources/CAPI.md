@@ -26,7 +26,7 @@ Writes a specific `value` to the specified `address` and number of `bytes`. You 
 
 E.g.:
 ```js
-CAPI.MEM.write(0x12n, 1, 0x200000n, "t0");
+CAPI.MEM.write(registers.t0, 1, registers.t0, "t0");
 ```
 
 
@@ -44,7 +44,7 @@ Reads a specific number of `bytes` in the specified `address` and returns them. 
 
 E.g.:
 ```js
-CAPI.MEM.read(0x200000n, 1, "t0");
+registers.t0 = CAPI.MEM.read(registers.t1, 1, "t0");
 ```
 
 
@@ -72,7 +72,7 @@ Adds a `hint` (description of what the address holds) for the specified memory `
 
 E.g.:
 ```js
-CAPI.MEM.addHint(0x200000n, "float64", 64);
+CAPI.MEM.addHint(registers.f0, "float64", 64);
 ```
 
 
@@ -114,7 +114,7 @@ Supported types are:
 
 E.g.:
 ```js
-CAPI.SYSCALL.print(0x45n, "char");
+CAPI.SYSCALL.print(registers.a0, "char");
 ```
 
 
@@ -158,7 +158,6 @@ CAPI.SYSCALL.get_clk_cycles();
 ```
 
 
-
 <!--
 ### `CAPI.SYSCALL.sbrk`
 
@@ -173,189 +172,366 @@ CAPI.SYSCALL.sbrk("a0", "v0");
 ```
 -->
 
+
+
 ## Validation
 
+### `CAPI.SYSCALL.raise`
+
+```ts
+CAPI.SYSCALL.raise(msg: string): never { }
+```
+
+Raises an error with a specific `msg`.
+
+E.g.:
+```js
+CAPI.SYSCALL.raise("Help!");
+```
+
+
+### `CAPI.SYSCALL.isOverflow`
+
+```ts
+CAPI.SYSCALL.isOverflow(op1: bigint, op2: bigint, res_u: bigint): boolean { }
+```
+
+Checks if the result `res_u` of operating two operands `op1` and `op2` caused an overflow.
+
+E.g.:
+```js
+CAPI.SYSCALL.isOverflow(registers.t0, registers.t1, registers.t0 + registers.t1);
+```
+
+
+## Stack
+These functions are used for the stack tracker and sentinel modules, and are a way to tell CREATOR when a new function frame begins and ends. They should be included in the instructions that jump to, o return from, a routine, as is the case of RISC-V's `jal` and `jr` instructions.
+
+
+### `CAPI.STACK.beginFrame`
+
+```ts
+CAPI.STACK.beginFrame(addr?: bigint): void { }
+```
+
+Marks the beginning of a function frame at `address`. If not specified, it takes the current (real) value of the program counter.
+
+E.g.:
+```js
+registers.pc = ...
+CAPI.SYSCALL.beginFrame();
+```
+
+
+### `CAPI.STACK.endFrame`
+
+```ts
+CAPI.STACK.endFrame(): void { }
+```
+
+Ends the current stack frame.
+
+E.g.:
+```js
+registers.pc = ...
+CAPI.SYSCALL.endFrame();
+```
+
+
+
+## Floating point
+
+
+## Registers
+
+
+### `CAPI.REG.read`
+
+```ts
+CAPI.REG.read(name: string): bigint { }
+```
+
+Returns the value stored in register `name`.
+
+E.g.:
+```js
+const foo = CAPI.REG.read("t0");
+```
+
+
+### `CAPI.REG.write`
+
+```ts
+CAPI.REG.write(value: bigint, name: string): void { }
+```
+
+Stores `value` in register `name`.
+
+E.g.:
+```js
+CAPI.REG.write(0x69n, "t0");
+```
+
+
+
+## Architecture
+`CAPI.ARCH` exposes the interface of the currently loaded [architecture plugin](custom-architectures.md#plugins).
+
+The supported plugins are [`riscv`](#risc-v), [`mips`](#mips) and [`z80`](#z80).
+
+### RISC-V
+
+#### `toJSNumberD`
+
+
+```ts
+CAPI.ARCH.toJSNumberD(bigIntValue: bigint): [number, string] { }
+```
 
 <!--
-### Exceptions
+Used when the D extension is enabled
+These are the possible cases:
+1. The value is a float64 NaN
+    1.1 The value is a NaN-boxed float32 (upper 32
+        bits are all 1's, lower 32 bits contain
+        float32 representation).
+    1.2 The value is the canonical NaN (0x7ff8000000000000n)
+2. The value is a valid float64 representation
+-->
 
-* capi_raise (msg) &rarr; Show an error message.
-  ```javascript
-  capi_raise('Problem detected :-(') ;
-  ```
-
-* capi_arithmetic_overflow ( op1, op2, res_u ) &rarr; Checks if there is some arithmetic overflow.
-  ```javascript
-  var isover = capi_arithmetic_overflow(rs1, inm, rs1+inm);
-  if (isover)
-       { capi_raise('Integer Overflow'); }
-  else { rd = rs1 + inm; }
-  ```
-
-* capi_bad_align ( addr, type ) &rarr; Checks if address is aligned for this architecture.
-  ```javascript
-  var isnotalign = capi_bad_align(rs1+inm, 'd');
-  if (isnotalign) { capi_raise('The memory must be align'); }
-  ```
+E.g.:
+```js
+let value, type;
+[value, type] = CAPI.ARCH.toJSNumberD(registers.t0);
+```
 
 
-### Memory access
-
-* capi_mem_write ( destination_address, value2store, byte_or_half_or_word, reg_name ) &rarr; Store a value into an address.
-  ```javascript
-  capi_mem_write(base+off+4, val, 'w', rt_name);
-  ```
-
-* capi_mem_read ( source_address, byte_or_half_or_word, reg_name ) &rarr; Read a value from an address.
-  ```javascript
-  capi_mem_read(0x12345, 'b', rt_name) ;
-  ```
+<!-- TODO: finish -->
 
 
-### Syscalls
-
-* capi_exit () &rarr; System call to stop the execution.
-
-* capi_print_int ( register_id ) &rarr; System call for printing an integer.
-
-* capi_print_float ( register_id ) &rarr; System call for printing a float.
-
-* capi_print_double ( register_id ) &rarr; System call for printing a double.
-
-* capi_print_char ( register_id ) &rarr; System call for printing a char.
-
-* capi_print_string ( register_id ) &rarr; System call for printing a string.
-
-* capi_read_int ( register_id ) &rarr;  System call for reading an integer.
-
-* capi_read_float ( register_id ) &rarr; System call for reading a float.
-
-* capi_read_double ( register_id ) &rarr; System call for reading a double.
-
-* capi_read_char ( register_id ) &rarr; System call for reading a char.
-
-* capi_read_string ( register_id, register_id_2 ) &rarr; System call for reading a string.
-
-* capi_sbrk ( value1, value2 ) &rarr; System call for allocating memory.
-
-* capi_get_clk_cycles ( ) &rarr; Get CLK Cylces.
-  
-#### Syscall examples (ecall RISC-V)  
-  
-  ```javascript
-  switch(a7) {
-    case 1:  capi_print_int('a0');
-             break;
-    case 2:  capi_print_float('fa0');
-             break;
-    case 3:  capi_print_double('fa0');
-             break;
-    case 4:  capi_print_string('a0');
-             break;
-    case 5:  capi_read_int('a0');
-             break;
-    case 6:  capi_read_float('fa0');
-             break;
-    case 7:  capi_read_double('fa0');
-             break;
-    case 8:  capi_read_string('a0', 'a1');
-             break;
-    case 9:  capi_sbrk('a0', 'a0');
-             break;
-    case 10: capi_exit();
-             break;
-    case 11: capi_print_char('a0');
-             break;
-    case 12: capi_read_char('a0');
-             break;
-  }
-  ```
+### MIPS
 
 
-### Check stack
 
-* capi_callconv_begin ( addr ) &rarr; Save current state at the CPU that must be preserved by calling convention.
-  ```javascript
-  capi_callconv_begin(inm)
-  ```
-
-* capi_callconv_end () &rarr; Checks if the current state at the CPU is the same as when capi_callconv_begin was called.
-  ```javascript
-  capi_callconv_end();
-  ```
+### Z80
 
 
-### Draw stack
 
-* capi_drawstack_begin ( addr ) &rarr; It updates in the User Interface the current stack trace.
-  ```javascript
-  capi_drawstack_begin(inm);
-  ```
+## Interrupts
+Functions to manage interrupts and privilege modes.
 
-* capi_drawstack_end () &rarr; It updates in the User Interface the current stack trace.
-  ```javascript
-  capi_drawstack_end() ;
-  ```
+For more information, see [Interrupt Support](custom-architectures.md#interrupt-support).
 
 
-### Representation
+### `CAPI.INTERRUPTS.setUserMode`
 
-* capi_int2uint ( value ) &rarr; Signed integer to unsigned integer
-  ```javascript
-  capi_int2uint(5) ;
-  ```
+```ts
+CAPI.INTERRUPTS.setUserMode(): void { }
+```
 
-* capi_uint2int ( value ) &rarr; Unsigned integer to signed integer.
-  ```javascript
-  capi_uint2int(5) ;
-  ```
-  
-* capi_uint2float32 ( value ) &rarr; Unsigned integer to simple precision IEEE754.
-  ```javascript
-  capi_uint2float32(5) ;
-  ```
-  
-* capi_float322uint ( value ) &rarr; Simple precision IEEE754 to unsigned integer.
-  ```javascript
-  capi_float322uint(5) ;
-  ```
-  
-* capi_uint2float64 ( value0, value1 ) &rarr; Unsigned integer to double precision IEEE754.
-  ```javascript
-  capi_uint2float64 ( value0, value1 )
-  ```
+Sets the privilege level to User.
 
-* capi_float642uint ( value ) &rarr; Double precision IEEE754 to unsigned integer.
-  ```javascript
-  capi_float642uint(5) ;
-  ```
-  
-* capi_float2bin ( f ) &rarr; Simple precision IEEE754 to binary.
-  ```javascript
-  capi_float2bin(5) ;
-  let a = capi_float2bin(rs1);
-  ```
-  
-* capi_split_double ( reg, index ) &rarr; Given a double precision IEEE 754 value, get the 32-bits most significant (index=1) bits or the least significant bits (index=0).
-  ```javascript
-  var val = capi_split_double(ft, 0);
-  ```
+E.g.:
+```js
+CAPI.INTERRUPTS.setUserMode();
+```
 
-* capi_check_ieee ( sign, exponent, mantissa ) &rarr; Indicates the type of an IEEE value:
-  * 0 &rarr; -infinite
-  * 1 &rarr; -normalized number
-  * 2 &rarr; -non-normalized number
-  * 3 &rarr; -0
-  * 4 &rarr; +0
-  * 5 &rarr; +normalized number
-  * 6 &rarr; +non-normalized number
-  * 7 &rarr; +inf
-  * 8 &rarr; -NaN
-  * 9 &rarr; +NaN
-  
-  <br />
-  
-  ```javascript
-  rd = capi_check_ieee(parseInt(a[0]), parseInt(a.slice(1,9), 2), parseInt(a.slice(10), 2));
-  ```
- -->
+
+### `CAPI.INTERRUPTS.setKernelMode`
+
+```ts
+CAPI.INTERRUPTS.setKernelMode(): void { }
+```
+
+Sets the privilege level to Kernel.
+
+E.g.:
+```js
+CAPI.INTERRUPTS.setKernelMode();
+```
+
+
+### `CAPI.INTERRUPTS.create`
+
+```ts
+CAPI.INTERRUPTS.create(type: InterruptType): void { }
+```
+
+Creates an interrupt of the specified `type`.
+
+E.g.:
+```js
+CAPI.INTERRUPTS.create(InterruptType.Software);
+```
+
+
+### `CAPI.INTERRUPTS.enable`
+
+```ts
+CAPI.INTERRUPTS.enable(type: InterruptType): void { }
+```
+
+Enables an interrupt `type`.
+
+E.g.:
+```js
+CAPI.INTERRUPTS.enable(InterruptType.Software);
+```
+
+
+### `CAPI.INTERRUPTS.globalEnable`
+
+```ts
+CAPI.INTERRUPTS.globalEnable(): void { }
+```
+
+Globally enables interrupts.
+
+E.g.:
+```js
+CAPI.INTERRUPTS.globalEnable();
+```
+
+
+### `CAPI.INTERRUPTS.disable`
+
+```ts
+CAPI.INTERRUPTS.disable(type: InterruptType): void { }
+```
+
+Disables an interrupt `type`.
+
+E.g.:
+```js
+CAPI.INTERRUPTS.disable(InterruptType.Software);
+```
+
+
+### `CAPI.INTERRUPTS.globalDisable`
+
+```ts
+CAPI.INTERRUPTS.globalDisable(): void { }
+```
+
+Globally disables interrupts.
+
+E.g.:
+```js
+CAPI.INTERRUPTS.globalDisable();
+```
+
+
+### `CAPI.INTERRUPTS.isEnabled`
+
+```ts
+CAPI.INTERRUPTS.isEnabled(type: InterruptType): boolean { }
+```
+
+Checks if an interrupt `type` is enabled.
+
+E.g.:
+```js
+CAPI.INTERRUPTS.isEnabled(InterruptType.Software);
+```
+
+
+### `CAPI.INTERRUPTS.isGlobalEnabled`
+
+```ts
+CAPI.INTERRUPTS.isGlobalEnabled(): boolean { }
+```
+
+Checks if interrupts are globally enabled.
+
+E.g.:
+```js
+CAPI.INTERRUPTS.isGlobalEnabled();
+```
+
+
+### `CAPI.INTERRUPTS.clear`
+
+```ts
+CAPI.INTERRUPTS.clear(type: InterruptType): void { }
+```
+
+Clears interrupts of the specified `type`.
+
+E.g.:
+```js
+CAPI.INTERRUPTS.clear(InterruptType.Software);
+```
+
+
+### `CAPI.INTERRUPTS.globalClear`
+
+```ts
+CAPI.INTERRUPTS.globalClear(): void { }
+```
+
+Clears all interrupts.
+
+E.g.:
+```js
+CAPI.INTERRUPTS.globalClear();
+```
+
+
+### `CAPI.INTERRUPTS.setCustomHandler`
+
+```ts
+CAPI.INTERRUPTS.setCustomHandler(): void { }
+```
+
+Sets the interrupt handler to the custom handler.
+
+E.g.:
+```js
+CAPI.INTERRUPTS.setCustomHandler();
+```
+
+
+### `CAPI.INTERRUPTS.setCREATORHandler`
+
+```ts
+CAPI.INTERRUPTS.setCREATORHandler(): void { }
+```
+
+Sets the interrupt handler to the default CREATOR handler.
+
+E.g.:
+```js
+CAPI.INTERRUPTS.setCREATORHandler();
+```
+
+
+### `CAPI.INTERRUPTS.setHighlight`
+
+```ts
+CAPI.INTERRUPTS.setHighlight(): void { }
+```
+
+Highlights the current instruction as "interrupted" in the UI.
+
+E.g.:
+```js
+CAPI.INTERRUPTS.setHighlight();
+```
+
+
+### `CAPI.INTERRUPTS.clearHighlight`
+
+```ts
+CAPI.INTERRUPTS.setHighlight(): void { }
+```
+
+Removes the "interrupted" highlight in the UI. Typically used in instructions that return from the interrupt handler, such as RISC-V's `mret`.
+
+E.g.:
+```js
+CAPI.INTERRUPTS.clearHighlight();
+```
+
+
+
+

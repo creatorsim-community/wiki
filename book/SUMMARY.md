@@ -59,6 +59,7 @@
 * [Snapshots](teaching-resources/snapshots.md)
 * [Validating program execution](teaching-resources/validator.md)
 * [Creating Custom Architectures](teaching-resources/custom-architectures.md)
+    * [Plugins](teaching-resources/custom-architectures.md#plugins)
     * [Interrupt Support](teaching-resources/custom-architectures.md#interrupt-support)
     * [Privileged Instructions](teaching-resources/custom-architectures.md#privileged-instructions)
     * [Timers](teaching-resources/custom-architectures.md#timers)
@@ -67,6 +68,14 @@
     * [Memory](teaching-resources/CAPI.md#memory)
     * [System calls](teaching-resources/CAPI.md#system-calls)
     * [Validation](teaching-resources/CAPI.md#validation)
+    * [Stack](teaching-resources/CAPI.md#stack)
+    * [Floating point](teaching-resources/CAPI.md#floating-point)
+    * [Registers](teaching-resources/CAPI.md#registers)
+    * [Architecture](teaching-resources/CAPI.md#architecture)
+        * [RISC-V](teaching-resources/CAPI.md#risc-v)
+        * [MIPS](teaching-resources/CAPI.md#mips)
+        * [Z80](teaching-resources/CAPI.md#z80)
+    * [Interrupts](teaching-resources/CAPI.md#interrupts)
 
 
 ## Development Guide

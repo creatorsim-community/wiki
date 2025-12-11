@@ -1,5 +1,7 @@
 {
   "root": "./book",
+  "title": "CREATOR documentation",
+  "author": "CREATOR Team",
   "plugins": ["alerts", "mermaid-md-adoc"],
   "pluginsConfig": {
     "alerts": {
