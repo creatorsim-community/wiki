@@ -15,12 +15,12 @@ As you type, the editor suggests completions for instructions, registers, and la
 ![Editor Auto-Completion](img/editor_autocomplete.png)
 *Figure: Auto-completion suggestions for RISC-V instructions.*
 
-## Help Tooltips
+## Help Tooltips
 Hover over instructions to see detailed help tooltips, including syntax, description, and usage examples.
 ![Editor Help Tooltip](img/editor_help.png)
 *Figure: Help tooltip for the `ADD` instruction in RISC-V.*
 
-## Go to Definition/References
+## Go to Definition/References
 Right-click a label and select "Go to Definition" to jump to its declaration. Right-click and select "Find All References" to see all usages of that label in your code.
 ![Editor References](img/editor_references.png)
 *Figure: Finding all references to a label in the code.*

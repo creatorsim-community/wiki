@@ -24,7 +24,7 @@ CREATOR supports breakpoints to help with debugging. To set a breakpoint, click 
 For more information, see [Privileged Instructions](../teaching-resources/custom-architectures.md#privileged-instructions).
 
 
-## Interrupt Handling
+## Interrupt Handling
 Some architectures support interrupts. In such cases, CREATOR reacts according to the architecture's interrupt handling mechanisms. RISC-V and Z80 have their own interrupt models that are simulated accordingly.
 
 CREATOR has two interrupt handlers: the default "CREATOR" handler, and a custom architecture-defined one. The CREATOR handler is the simplest of the two, it only handles architecture-defined system calls (see [CREATOR handler](../teaching-resources/custom-architectures.md#creator-handler)), and treats all other interrupts as errors. On the other hand, the custom handler allows full control over interrupts, which requires writting a custom interrupt handler in the program.

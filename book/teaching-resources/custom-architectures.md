@@ -2,7 +2,7 @@
 
 CREATOR supports defining custom architectures through YAML configuration files. This allows adding new instruction sets or modifying existing ones.
 
-## Creating an Architecture File
+## Creating an Architecture File
 An architecture file is a YAML file that describes the architecture's properties, including its instruction set, registers, memory layout, and other relevant details. Instructions are defined with their binary encoding, assembly syntax, and semantics.
 
 > [!NOTE]

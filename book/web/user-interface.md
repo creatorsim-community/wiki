@@ -84,7 +84,7 @@ The Statistics tab shows execution metrics including the number of instructions 
 ![Simulator Stats](img/simulator_stats.png)
 *Figure: Statistics tab displaying execution metrics and performance data.*
 
-### Sentinel
+### Sentinel
 CREATOR includes a Sentinel feature that monitors the execution status of your program. It provides feedback on whether the parameter passing conventions are being folowed correctly. The sentinel button changes color based on the status:
 - **Green (OK)**: All parameters passed correctly
 - **Red (Error)**: Parameter passing conventions violated

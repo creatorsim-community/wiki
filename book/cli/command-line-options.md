@@ -203,5 +203,5 @@ Show all available options:
 creator-cli --help
 ```
 
-## Next Steps
+## Next Steps
 - Continue to the [Commands Reference](commands-reference.md) to learn about interactive commands available in the CLI.

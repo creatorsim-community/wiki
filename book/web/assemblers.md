@@ -14,7 +14,7 @@ Instruction sets with multiple optional fields are not supported.
 
 [RASM](https://github.com/EdouardBERGE/rasm) is a Free and open-source Z80 assembler. When choosing the Z80 architecture in CREATOR, RASM is used as the default assembler.
 
-## Choosing an Assembler
+## Choosing an Assembler
 
 By default, the assembler is chosen based on the architecture selected. From a user perspective, there is no need to choose. The appropriate assembler will always be used automatically.
 

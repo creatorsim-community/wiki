@@ -91,7 +91,7 @@ git pull origin main && bun install
 ```
 
 
-## Next Steps
+## Next Steps
 - Proceed to the [Command-Line Options](command-line-options.md) to learn how to run programs with different architectures and settings.
 
 
